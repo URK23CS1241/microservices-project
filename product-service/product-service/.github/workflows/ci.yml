@@ -1,0 +1,10 @@
+name: Product Service CI
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker build -t product-service ./product-service
