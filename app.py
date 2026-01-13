@@ -1,10 +1,18 @@
-from flask import Flask, jsonify
+from flask import Flask
+import requests
 
 app = Flask(__name__)
 
 @app.route("/users")
 def users():
-    return jsonify({"service": "User"})
+    return requests.get("http://host.docker.internal:5001/users").text
 
-app.run(host="0.0.0.0", port=5001)
+@app.route("/products")
+def products():
+    return requests.get("http://host.docker.internal:5002/products").text
 
+@app.route("/orders")
+def orders():
+    return requests.get("http://host.docker.internal:5003/orders").text
+
+app.run(host="0.0.0.0", port=8000)
